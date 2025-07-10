@@ -27,15 +27,15 @@ kotlin {
 
 
     jvm()
-    // iosX64()
-    // iosArm64()
-    // iosSimulatorArm64()
-    // linuxArm64()
-    // linuxX64()
-    // linuxArm64()
-    // wasmJs()
-    // wasmWasi()
-    // js()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    //linuxArm64()
+    //linuxX64()
+    //linuxArm64()
+    //wasmJs()
+    //wasmWasi()
+    //js()
 
     sourceSets {
         commonMain {
@@ -82,7 +82,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates(group.toString(), "borr", version.toString())
+    coordinates(group.toString(), "buri", version.toString())
 
     pom {
         name = "buri"

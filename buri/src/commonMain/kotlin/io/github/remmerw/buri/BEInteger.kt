@@ -1,6 +1,7 @@
 package io.github.remmerw.buri
 
 import kotlinx.io.Sink
+import kotlin.jvm.JvmInline
 
 @JvmInline
 value class BEInteger(private val value: Long) : BEObject {
