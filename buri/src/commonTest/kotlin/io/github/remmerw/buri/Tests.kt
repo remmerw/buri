@@ -64,7 +64,7 @@ class Tests {
     }
 
     @Test
-    fun coverage(){
+    fun coverage() {
         assertNotNull('1'.code.toByte().bencode())
         assertNotNull(1.bencode())
         assertNotNull(1L.bencode())
