@@ -4,6 +4,7 @@ import kotlinx.io.Buffer
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
 class Tests {
 
@@ -60,6 +61,15 @@ class Tests {
         assertEquals(a.toInt(), 555)
         val b = value.last() as BEString
         assertContentEquals(b.toByteArray(), "hello".encodeToByteArray())
+    }
+
+    @Test
+    fun coverage(){
+        assertNotNull('1'.code.toByte().bencode())
+        assertNotNull(1.bencode())
+        assertNotNull(1L.bencode())
+        assertNotNull("".bencode())
+        assertNotNull(byteArrayOf().bencode())
     }
 
 
