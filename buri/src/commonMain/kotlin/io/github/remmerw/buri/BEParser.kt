@@ -1,11 +1,9 @@
 package io.github.remmerw.buri
 
-import kotlinx.io.Source
-
 
 internal class BEParser internal constructor(
     private val type: BEType,
-    private val scanner: Scanner
+    private val scanner: BEScanner
 ) {
 
     fun readType(): BEType {
@@ -70,80 +68,9 @@ const val INTEGER_PREFIX: Char = 'i'
 const val LIST_PREFIX: Char = 'l'
 const val MAP_PREFIX: Char = 'd'
 
-internal class Scanner(private val source: Source) {
 
-    fun read(): Int {
-        if (!source.exhausted()) {
-            return source.readByte().toInt() and 0xFF
-        }
-        return -1
-    }
-
-    fun peek(): Int {
-        if (!source.exhausted()) {
-            return source.peek().readByte().toInt() and 0xFF
-        }
-        return -1
-    }
-
-    fun readMapObject(builder: BEMapBuilder): BEMap {
-        var c: Int
-
-        while ((peek().also { c = it }) != -1) {
-            if (builder.accept(c)) {
-                read()
-            } else {
-                break
-            }
-        }
-        return builder.build() as BEMap
-    }
-
-    fun readListObject(builder: BEListBuilder): BEList {
-        var c: Int
-
-        while ((peek().also { c = it }) != -1) {
-            if (builder.accept(c)) {
-                read()
-            } else {
-                break
-            }
-        }
-        return builder.build() as BEList
-    }
-
-    fun readStringObject(builder: BEStringBuilder): BEString {
-        var c: Int
-
-        while ((peek().also { c = it }) != -1) {
-            if (builder.accept(c)) {
-                read()
-            } else {
-                break
-            }
-        }
-        return builder.build()
-    }
-
-    fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
-        var c: Int
-
-        while ((peek().also { c = it }) != -1) {
-            if (builder.accept(c)) {
-                read()
-            } else {
-                break
-            }
-        }
-        return builder.build() as BEInteger
-    }
-}
-
-/**
- * Create a parser for the provided bencoded document.
- */
-internal fun createParser(source: Source): BEParser {
-    val scanner = Scanner(source)
+internal fun createParser(reader: BEReader): BEParser {
+    val scanner = BEScanner(reader)
     val type = getTypeForPrefix(scanner.peek().toChar())
     return BEParser(type, scanner)
 }

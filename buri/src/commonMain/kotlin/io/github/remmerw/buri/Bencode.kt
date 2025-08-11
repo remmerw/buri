@@ -2,6 +2,7 @@ package io.github.remmerw.buri
 
 import kotlinx.io.Sink
 import kotlinx.io.Source
+import kotlinx.io.readByteArray
 
 
 fun decodeBencodeToString(source: Source): String {
@@ -20,7 +21,7 @@ fun decodeBencodeToList(source: Source): List<BEObject> {
     return (source.decodeBencode() as BEList).toList()
 }
 
-fun Source.decodeBencode(): BEObject {
+fun BEReader.decodeBencode(): BEObject {
     val parser = createParser(this)
     return when (parser.readType()) {
         BEType.STRING -> parser.readString()
@@ -28,6 +29,11 @@ fun Source.decodeBencode(): BEObject {
         BEType.LIST -> parser.readList()
         BEType.MAP -> parser.readMap()
     }
+}
+
+fun Source.decodeBencode(): BEObject {
+    val data = this.readByteArray()
+    return BEReader(data, data.size).decodeBencode()
 }
 
 fun Byte.bencode(): BEInteger {
