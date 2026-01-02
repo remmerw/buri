@@ -14,7 +14,7 @@ value class BEMap(private val map: Map<String, BEObject>) :
 
         // sort entries by string key
         map.entries.sortedBy { it.key }.forEach { e: Map.Entry<String, BEObject> ->
-            mapped.put(e.key.encodeToByteArray(), e.value)
+            mapped[e.key.encodeToByteArray()] = e.value
         }
 
         for ((key, value) in mapped) {
