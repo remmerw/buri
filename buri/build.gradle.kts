@@ -12,7 +12,7 @@ version = "0.0.6"
 kotlin {
 
 
-    androidLibrary {
+    android {
         namespace = "io.github.remmerw.buri"
         compileSdk = 36
         minSdk = 27
@@ -35,7 +35,10 @@ kotlin {
     linuxArm64()
     //wasmJs()
     //wasmWasi()
-    //js()
+    js {
+        browser()
+        nodejs()
+    }
 
     sourceSets {
         commonMain {
