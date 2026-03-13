@@ -32,7 +32,6 @@ kotlin {
     iosSimulatorArm64()
     linuxArm64()
     linuxX64()
-    linuxArm64()
     //wasmJs()
     //wasmWasi()
     js {
