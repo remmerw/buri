@@ -17,8 +17,7 @@ internal abstract class BEPrefixedTypeBuilder : BEObjectBuilder {
                 return true
             } else {
                 throw IllegalArgumentException(
-                    ("Invalid prefix for type " + type.name.lowercase()
-                            + " (as ASCII char): " + b.toChar())
+                    "Invalid prefix for type ${type.name.lowercase()} (as ASCII char): ${b.toChar()}"  // Optimized: string interpolation
                 )
             }
         }
@@ -32,8 +31,8 @@ internal abstract class BEPrefixedTypeBuilder : BEObjectBuilder {
     }
 
     override fun build(): BEObject {
-        check(receivedPrefix) { "Can't build " + type().name.lowercase() + " -- no content" }
-        check(receivedEOF) { "Can't build " + type().name.lowercase() + " -- content was not terminated" }
+        check(receivedPrefix) { "Can't build ${type().name.lowercase()} -- no content" }  // Optimized: string interpolation
+        check(receivedEOF) { "Can't build ${type().name.lowercase()} -- content was not terminated" }  // Optimized: string interpolation
         return doBuild()
     }
 
