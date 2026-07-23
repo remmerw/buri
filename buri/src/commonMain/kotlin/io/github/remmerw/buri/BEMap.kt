@@ -14,10 +14,10 @@ value class BEMap(private val map: Map<String, BEObject>) :
         val sortedEntries = map.entries
             .sortedBy { it.key }
             .map { (key, value) ->
-                Triple(key.encodeToByteArray(), key, value)  // Cache the encoded key bytes
+                Pair(key.encodeToByteArray(), value)  // Cache the encoded key bytes
             }
 
-        for ((keyBytes, originalKey, value) in sortedEntries) {
+        for ((keyBytes, value) in sortedEntries) {
             // Write key length and delimiter
             sink.write(keyBytes.size.toString().encodeToByteArray())
             sink.writeByte(DELIMITER.code.toByte())
