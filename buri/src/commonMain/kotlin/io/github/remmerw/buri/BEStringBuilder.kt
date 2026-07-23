@@ -2,7 +2,7 @@ package io.github.remmerw.buri
 
 
 internal class BEStringBuilder : BEObjectBuilder {
-    private var numericLength: String = ""
+    private val numericLength = StringBuilder()  // Optimized: use StringBuilder instead of String
     private var result: ByteArray = byteArrayOf()
     private var length = 0
     private var bytesAcceptedCount = 0
@@ -12,7 +12,7 @@ internal class BEStringBuilder : BEObjectBuilder {
     override fun accept(b: Int): Boolean {
         val c = b.toChar()
         if (shouldReadBody) {
-            if (bytesAcceptedCount + 1 > length) {
+            if (bytesAcceptedCount >= length) {  // Optimized: simplified bounds check
                 return false
             }
             result[bytesAcceptedCount] = b.toByte()
@@ -23,14 +23,14 @@ internal class BEStringBuilder : BEObjectBuilder {
             if (c == DELIMITER) {
                 shouldReadBody = true
                 bytesAcceptedCount = 0
-                length = numericLength.toInt()
+                length = numericLength.toString().toInt()
                 result = ByteArray(length)
                 return true
             }
-            require(c.isDigit()) {
-                "Unexpected token while reading string's length (as ASCII char)"
+            if (!c.isDigit()) {  // Optimized: explicit check instead of require() in hot path
+                throw IllegalArgumentException("Unexpected token while reading string's length (as ASCII char): $c")
             }
-            numericLength += c
+            numericLength.append(c)  // Optimized: use StringBuilder.append() instead of String concatenation
             bytesAcceptedCount++
             return true
         }
