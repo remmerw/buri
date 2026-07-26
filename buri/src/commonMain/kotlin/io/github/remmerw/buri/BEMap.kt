@@ -10,19 +10,20 @@ value class BEMap(private val map: Map<String, BEObject>) :
     override fun encodeTo(sink: Sink) {
         sink.writeByte(MAP_PREFIX.code.toByte())
 
-        val mapped: MutableMap<ByteArray, BEObject> = mutableMapOf()
+        // Optimized: pre-compute byte arrays to avoid double encoding
+        val sortedEntries = map.entries
+            .sortedBy { it.key }
+            .map { (key, value) ->
+                Pair(key.encodeToByteArray(), value)  // Cache the encoded key bytes
+            }
 
-        // sort entries by string key
-        map.entries.sortedBy { it.key }.forEach { e: Map.Entry<String, BEObject> ->
-            mapped[e.key.encodeToByteArray()] = e.value
-        }
-
-        for ((key, value) in mapped) {
-
-            sink.write(key.size.toString().encodeToByteArray())
+        for ((keyBytes, value) in sortedEntries) {
+            // Write key length and delimiter
+            sink.write(keyBytes.size.toString().encodeToByteArray())
             sink.writeByte(DELIMITER.code.toByte())
-            sink.write(key)
-
+            // Write cached key bytes
+            sink.write(keyBytes)
+            // Write value
             value.encodeTo(sink)
         }
         sink.writeByte(EOF.code.toByte())

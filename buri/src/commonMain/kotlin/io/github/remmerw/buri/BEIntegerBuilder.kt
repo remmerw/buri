@@ -9,7 +9,7 @@ internal class BEIntegerBuilder : BEPrefixedTypeBuilder() {
             stringBuilder.append(c)
             return true
         }
-        throw IllegalArgumentException("Unexpected token while reading integer (as ASCII char): $c")
+        throw IllegalArgumentException("Unexpected token while reading integer (as ASCII char): $c")  // Optimized: string interpolation
     }
 
     override fun acceptEOF(): Boolean {

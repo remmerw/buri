@@ -29,32 +29,28 @@ internal class BEParser internal constructor(
 
     private fun readListObject(builder: BEListBuilder): BEList {
         check(this.type == BEType.LIST) {
-            "Can't read " + BEType.LIST.name.lowercase() +
-                    " from: " + type.name.lowercase()
+            "Can't read ${BEType.LIST.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
         }
         return scanner.readListObject(builder)
     }
 
     private fun readMapObject(builder: BEMapBuilder): BEMap {
         check(this.type == BEType.MAP) {
-            "Can't read " + BEType.MAP.name.lowercase() +
-                    " from: " + type.name.lowercase()
+            "Can't read ${BEType.MAP.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
         }
         return scanner.readMapObject(builder)
     }
 
     private fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
         check(this.type == BEType.INTEGER) {
-            "Can't read " + BEType.INTEGER.name.lowercase() +
-                    " from: " + type.name.lowercase()
+            "Can't read ${BEType.INTEGER.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
         }
         return scanner.readIntegerObject(builder)
     }
 
     private fun readStringObject(builder: BEStringBuilder): BEString {
         check(this.type == BEType.STRING) {
-            "Can't read " + BEType.STRING.name.lowercase() +
-                    " from: " + type.name.lowercase()
+            "Can't read ${BEType.STRING.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
         }
         return scanner.readStringObject(builder)
     }
@@ -80,7 +76,7 @@ internal fun getPrefixForType(type: BEType): Char {
         BEType.INTEGER -> INTEGER_PREFIX
         BEType.LIST -> LIST_PREFIX
         BEType.MAP -> MAP_PREFIX
-        else -> throw IllegalArgumentException("Unknown type: " + type.name.lowercase())
+        else -> throw IllegalArgumentException("Unknown type: ${type.name.lowercase()}")
     }
 }
 
