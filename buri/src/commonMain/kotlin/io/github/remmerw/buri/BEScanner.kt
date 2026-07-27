@@ -17,53 +17,41 @@ internal class BEScanner(private val reader: BEReader) {
     }
 
     fun readMapObject(builder: BEMapBuilder): BEMap {
-        var c: Int
-
-        while ((peek().also { c = it }) != -1) {
-            if (builder.accept(c)) {
-                read()
-            } else {
-                break
-            }
+        while (true) {
+            val c = peek()
+            if (c == -1) break
+            if (!builder.accept(c)) break
+            read()
         }
         return builder.build() as BEMap
     }
 
     fun readListObject(builder: BEListBuilder): BEList {
-        var c: Int
-
-        while ((peek().also { c = it }) != -1) {
-            if (builder.accept(c)) {
-                read()
-            } else {
-                break
-            }
+        while (true) {
+            val c = peek()
+            if (c == -1) break
+            if (!builder.accept(c)) break
+            read()
         }
         return builder.build() as BEList
     }
 
     fun readStringObject(builder: BEStringBuilder): BEString {
-        var c: Int
-
-        while ((peek().also { c = it }) != -1) {
-            if (builder.accept(c)) {
-                read()
-            } else {
-                break
-            }
+        while (true) {
+            val c = peek()
+            if (c == -1) break
+            if (!builder.accept(c)) break
+            read()
         }
         return builder.build()
     }
 
     fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
-        var c: Int
-
-        while ((peek().also { c = it }) != -1) {
-            if (builder.accept(c)) {
-                read()
-            } else {
-                break
-            }
+        while (true) {
+            val c = peek()
+            if (c == -1) break
+            if (!builder.accept(c)) break
+            read()
         }
         return builder.build() as BEInteger
     }
