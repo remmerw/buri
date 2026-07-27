@@ -3,7 +3,7 @@ package io.github.remmerw.buri
 
 internal class BEParser internal constructor(
     private val type: BEType,
-    private val scanner: BEScanner
+    private val reader: BEReader
 ) {
 
     fun readType(): BEType {
@@ -31,28 +31,28 @@ internal class BEParser internal constructor(
         check(this.type == BEType.LIST) {
             "Can't read ${BEType.LIST.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
         }
-        return scanner.readListObject(builder)
+        return reader.readListObject(builder)
     }
 
     private fun readMapObject(builder: BEMapBuilder): BEMap {
         check(this.type == BEType.MAP) {
             "Can't read ${BEType.MAP.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
         }
-        return scanner.readMapObject(builder)
+        return reader.readMapObject(builder)
     }
 
     private fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
         check(this.type == BEType.INTEGER) {
             "Can't read ${BEType.INTEGER.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
         }
-        return scanner.readIntegerObject(builder)
+        return reader.readIntegerObject(builder)
     }
 
     private fun readStringObject(builder: BEStringBuilder): BEString {
         check(this.type == BEType.STRING) {
             "Can't read ${BEType.STRING.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
         }
-        return scanner.readStringObject(builder)
+        return reader.readStringObject(builder)
     }
 
 
@@ -66,9 +66,8 @@ const val MAP_PREFIX: Char = 'd'
 
 
 internal fun createParser(reader: BEReader): BEParser {
-    val scanner = BEScanner(reader)
-    val type = getTypeForPrefix(scanner.peek().toChar())
-    return BEParser(type, scanner)
+    val type = getTypeForPrefix(reader.scannerPeek().toChar())
+    return BEParser(type, reader)
 }
 
 internal fun getPrefixForType(type: BEType): Char {
