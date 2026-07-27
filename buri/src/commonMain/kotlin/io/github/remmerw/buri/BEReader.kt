@@ -2,15 +2,14 @@ package io.github.remmerw.buri
 
 class BEReader(val data: ByteArray, val size: Int) {
     private var pos: Int = 0
-    private var cachedRemaining: Int = size
 
     // Original BEReader methods
     fun exhausted(): Boolean {
-        return cachedRemaining <= 0
+        return remaining() <= 0
     }
 
     fun remaining(): Int {
-        return cachedRemaining
+        return size - pos
     }
 
     fun peek(): Byte {
@@ -20,27 +19,26 @@ class BEReader(val data: ByteArray, val size: Int) {
     fun read(): Byte {
         val byte = data[pos]
         pos++
-        cachedRemaining--
         return byte
     }
 
-    // Integrated BEScanner methods
+    
     fun scannerRead(): Int {
-        if (cachedRemaining > 0) {
+        if (remaining() > 0) {
             return read().toInt() and 0xFF
         }
         return -1
     }
 
     fun scannerPeek(): Int {
-        if (cachedRemaining > 0) {
+        if (remaining() > 0) {
             return peek().toInt() and 0xFF
         }
         return -1
     }
 
     private fun readObject(builder: BEObjectBuilder): BEObject {
-        while (cachedRemaining > 0) {
+        while (remaining() > 0) {
             val c = peek().toInt() and 0xFF
             if (!builder.accept(c)) break
             read()
