@@ -21,7 +21,7 @@ fun decodeBencodeToList(source: Source): List<BEObject> {
     return (source.decodeBencode() as BEList).toList()
 }
 
-fun BEReader.decodeBencode(): BEObject {
+internal fun BEReader.decodeBencode(): BEObject {
     val parser = createParser(this)
     return when (parser.readType()) {
         BEType.STRING -> parser.readString()
