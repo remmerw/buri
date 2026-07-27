@@ -1,58 +1,48 @@
 package io.github.remmerw.buri
 
 internal class BEScanner(private val reader: BEReader) {
+    private var cachedPos: Int = 0
+    private var cachedRemaining: Int = reader.size
 
     fun read(): Int {
-        if (!reader.exhausted()) {
-            return reader.read().toInt() and 0xFF
+        if (cachedRemaining > 0) {
+            val byte = reader.read().toInt() and 0xFF
+            cachedRemaining--
+            return byte
         }
         return -1
     }
 
     fun peek(): Int {
-        if (!reader.exhausted()) {
+        if (cachedRemaining > 0) {
             return reader.peek().toInt() and 0xFF
         }
         return -1
     }
 
-    fun readMapObject(builder: BEMapBuilder): BEMap {
-        while (true) {
-            val c = peek()
-            if (c == -1) break
+    private fun readObject(builder: BEObjectBuilder): BEObject {
+        while (cachedRemaining > 0) {
+            val c = reader.peek().toInt() and 0xFF
             if (!builder.accept(c)) break
-            read()
-        }
-        return builder.build() as BEMap
-    }
-
-    fun readListObject(builder: BEListBuilder): BEList {
-        while (true) {
-            val c = peek()
-            if (c == -1) break
-            if (!builder.accept(c)) break
-            read()
-        }
-        return builder.build() as BEList
-    }
-
-    fun readStringObject(builder: BEStringBuilder): BEString {
-        while (true) {
-            val c = peek()
-            if (c == -1) break
-            if (!builder.accept(c)) break
-            read()
+            reader.read()
+            cachedRemaining--
         }
         return builder.build()
     }
 
+    fun readMapObject(builder: BEMapBuilder): BEMap {
+        return readObject(builder) as BEMap
+    }
+
+    fun readListObject(builder: BEListBuilder): BEList {
+        return readObject(builder) as BEList
+    }
+
+    fun readStringObject(builder: BEStringBuilder): BEString {
+        return readObject(builder) as BEString
+    }
+
     fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
-        while (true) {
-            val c = peek()
-            if (c == -1) break
-            if (!builder.accept(c)) break
-            read()
-        }
-        return builder.build() as BEInteger
+        return readObject(builder) as BEInteger
     }
 }
