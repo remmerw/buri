@@ -46,19 +46,19 @@ class BEReader(val data: ByteArray, val size: Int) {
         return builder.build()
     }
 
-    fun readMapObject(builder: BEMapBuilder): BEMap {
+    internal fun readMapObject(builder: BEMapBuilder): BEMap {
         return readObject(builder) as BEMap
     }
 
-    fun readListObject(builder: BEListBuilder): BEList {
+    internal fun readListObject(builder: BEListBuilder): BEList {
         return readObject(builder) as BEList
     }
 
-    fun readStringObject(builder: BEStringBuilder): BEString {
+    internal fun readStringObject(builder: BEStringBuilder): BEString {
         return readObject(builder) as BEString
     }
 
-    fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
+    internal fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
         return readObject(builder) as BEInteger
     }
 }
