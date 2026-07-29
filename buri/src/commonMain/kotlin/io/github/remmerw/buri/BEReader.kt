@@ -3,7 +3,7 @@ package io.github.remmerw.buri
 class BEReader(val data: ByteArray, val size: Int) {
     private var pos: Int = 0
 
-    // Original BEReader methods
+    
     fun exhausted(): Boolean {
         return remaining() <= 0
     }
@@ -23,14 +23,14 @@ class BEReader(val data: ByteArray, val size: Int) {
     }
 
     
-    fun scannerRead(): Int {
+    internal fun scannerRead(): Int {
         if (remaining() > 0) {
             return read().toInt() and 0xFF
         }
         return -1
     }
 
-    fun scannerPeek(): Int {
+    internal fun scannerPeek(): Int {
         if (remaining() > 0) {
             return peek().toInt() and 0xFF
         }
