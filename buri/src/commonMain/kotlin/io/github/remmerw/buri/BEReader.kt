@@ -1,6 +1,6 @@
 package io.github.remmerw.buri
 
-internal class BEReader(val data: ByteArray, val size: Int) {
+class BEReader(val data: ByteArray, val size: Int) {
     private var pos: Int = 0
 
     // Original BEReader methods
