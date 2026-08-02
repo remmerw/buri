@@ -26,7 +26,7 @@ jobs:
           java-version: '21' # Match your project's Java version
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
 
       # Optional: Prevent Android SDK location errors on Ubuntu runners
       - name: Write local.properties (Ubuntu only)
