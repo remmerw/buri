@@ -7,7 +7,8 @@ import kotlin.jvm.JvmInline
 value class BEList(private val list: List<BEObject>) : BEObject {
 
     override fun encodeTo(sink: Sink) {
-        sink.writeByte(LIST_PREFIX.code.toByte())
+        val writer = BEWriter(sink)
+        writer.list()
 
         list.forEach { value ->
             value.encodeTo(sink)
