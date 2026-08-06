@@ -14,7 +14,7 @@ value class BEList(private val list: List<BEObject>) : BEObject {
             value.encodeTo(sink)
         }
 
-        sink.writeByte(EOF.code.toByte())
+        writer.eof()
     }
 
     fun toList(): List<BEObject> {
