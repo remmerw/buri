@@ -21,5 +21,11 @@ class BEWriter(val sink: Sink){
    sink.write(value.toString().encodeToByteArray())
        eof()
     }
+
+    fun dataValue(val content: ByteArray){
+               sink.write(content.size.toString().encodeToByteArray())
+        sink.writeByte(DELIMITER.code.toByte())
+        sink.write(content)
+    }
  
 }
