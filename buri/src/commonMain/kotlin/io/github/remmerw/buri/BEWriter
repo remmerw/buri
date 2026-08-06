@@ -1,0 +1,14 @@
+package io.github.remmerw.buri
+
+
+import kotlinx.io.Sink
+
+class BEWriter(val sink: Sink){
+    fun eof(){
+        sink.writeByte(EOF.code.toByte())
+    }
+   
+    fun map(){
+        sink.writeByte(MAP_PREFIX.code.toByte())
+    }
+}
