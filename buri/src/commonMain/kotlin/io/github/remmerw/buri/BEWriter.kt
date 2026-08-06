@@ -15,4 +15,11 @@ class BEWriter(val sink: Sink){
     fun list(){
         sink.writeByte(LIST_PREFIX.code.toByte())
     }
+    
+    fun longValue(val value: Long){
+       sink.writeByte(INTEGER_PREFIX.code.toByte())
+
+       eof()
+    }
+ 
 }
