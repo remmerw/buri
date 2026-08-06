@@ -11,6 +11,9 @@ class BEWriter(val sink: Sink){
     fun map(){
         sink.writeByte(MAP_PREFIX.code.toByte())
     }
+
+    fun mapEntry(val key: String){
+    }
    
     fun list(){
         sink.writeByte(LIST_PREFIX.code.toByte())
