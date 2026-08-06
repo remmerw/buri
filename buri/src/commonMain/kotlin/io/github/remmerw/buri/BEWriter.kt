@@ -18,7 +18,7 @@ class BEWriter(val sink: Sink){
     
     fun longValue(val value: Long){
        sink.writeByte(INTEGER_PREFIX.code.toByte())
-
+               sink.write(value.toString().encodeToByteArray())
        eof()
     }
  
