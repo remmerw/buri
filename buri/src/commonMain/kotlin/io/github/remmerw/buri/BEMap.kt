@@ -8,7 +8,8 @@ value class BEMap(private val map: Map<String, BEObject>) :
     BEObject {
 
     override fun encodeTo(sink: Sink) {
-        sink.writeByte(MAP_PREFIX.code.toByte())
+        val writer = BEWriter(sink)
+        writer.map()
 
         // Optimized: pre-compute byte arrays to avoid double encoding
         val sortedEntries = map.entries
@@ -26,7 +27,7 @@ value class BEMap(private val map: Map<String, BEObject>) :
             // Write value
             value.encodeTo(sink)
         }
-        sink.writeByte(EOF.code.toByte())
+        writer.eof()
     }
 
     fun toMap(): Map<String, BEObject> {
