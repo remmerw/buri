@@ -4,7 +4,6 @@ import kotlinx.io.Sink
 import kotlinx.io.Source
 import kotlinx.io.readByteArray
 
-
 fun decodeBencodeToString(source: Source): String {
     return (source.decodeBencode() as BEString).toString()
 }

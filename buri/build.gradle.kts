@@ -11,13 +11,12 @@ version = "0.1.2"
 
 kotlin {
 
-
     android {
         namespace = "io.github.remmerw.buri"
         compileSdk = 37
         minSdk = 27
 
-        withHostTest {  }
+        withHostTest { }
 
         // Opt-in to enable and configure device-side (instrumented) tests
         withDeviceTest {
@@ -26,15 +25,14 @@ kotlin {
         }
     }
 
-
     jvm()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
     linuxArm64()
     linuxX64()
-    //wasmJs()
-    //wasmWasi()
+    // wasmJs()
+    // wasmWasi()
     js {
         browser()
         nodejs()
@@ -55,7 +53,6 @@ kotlin {
         }
     }
 }
-
 
 mavenPublishing {
     publishToMavenCentral()

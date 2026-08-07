@@ -44,16 +44,14 @@ class Tests {
         assertEquals(cmp, value)
     }
 
-
     @Test
     fun encodeDecodeList() {
-
         val value: List<BEObject> = listOf(
-            555L.bencode(), "hello".bencode()
+            555L.bencode(),
+            "hello".bencode(),
         )
         val buffer = Buffer()
         value.encodeBencodeTo(buffer)
-
 
         val list = decodeBencodeToList(buffer)
         assertEquals(value.size, list.size)
@@ -72,13 +70,12 @@ class Tests {
         assertNotNull(byteArrayOf().bencode())
     }
 
-
     @Test
     fun examplesList() {
-
         // prepare data
         val value: List<BEObject> = listOf(
-            555L.bencode(), "hello".bencode()
+            555L.bencode(),
+            "hello".bencode(),
         )
         val buffer = Buffer()
 
@@ -95,5 +92,4 @@ class Tests {
         val b = value.last() as BEString
         assertContentEquals(b.toByteArray(), "hello".encodeToByteArray())
     }
-
 }
