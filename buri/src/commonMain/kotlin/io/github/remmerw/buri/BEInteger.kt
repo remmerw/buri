@@ -7,8 +7,7 @@ import kotlin.jvm.JvmInline
 value class BEInteger(private val value: Long) : BEObject {
 
     override fun encodeTo(sink: Sink) {
-        val writer = BEWriter(sink)
-        writer.longValue(value)
+        sink.bencode(value)
     }
 
     fun toLong(): Long {
