@@ -12,7 +12,7 @@ class BEWriter(val sink: Sink){
         sink.writeByte(MAP_PREFIX.code.toByte())
     }
 
-    fun mapEntry(val key: String){
+    fun mapEntry(key: String){
        val keyBytes = key.encodeToByteArray()
       
        // Write key length and delimiter
