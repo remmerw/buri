@@ -8,6 +8,10 @@ fun Sink.bencode(value: ByteArray) {
     this.write(value)
 }
 
+fun Sink.bencode(value: BEObject) {  
+    value.encodeTo(this)
+}
+
 fun Sink.bencode(value: String) {  
     this.bencode(value.encodeToByteArray())
 }
