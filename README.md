@@ -21,7 +21,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             ...
-            implementation("io.github.remmerw:buri:0.1.3")
+            implementation("io.github.remmerw:buri:0.1.4")
         }
         ...
     }
