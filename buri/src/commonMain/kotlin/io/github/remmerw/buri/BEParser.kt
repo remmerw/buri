@@ -1,15 +1,13 @@
 package io.github.remmerw.buri
 
-
 internal class BEParser internal constructor(
     private val type: BEType,
-    private val reader: BEReader
+    private val reader: BEReader,
 ) {
 
     fun readType(): BEType {
         return type
     }
-
 
     fun readMap(): BEMap {
         return readMapObject(BEMapBuilder())
@@ -29,33 +27,31 @@ internal class BEParser internal constructor(
 
     private fun readListObject(builder: BEListBuilder): BEList {
         check(this.type == BEType.LIST) {
-            "Can't read ${BEType.LIST.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
+            "Can't read ${BEType.LIST.name.lowercase()} from: ${type.name.lowercase()}" // Optimized: string interpolation
         }
         return reader.readListObject(builder)
     }
 
     private fun readMapObject(builder: BEMapBuilder): BEMap {
         check(this.type == BEType.MAP) {
-            "Can't read ${BEType.MAP.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
+            "Can't read ${BEType.MAP.name.lowercase()} from: ${type.name.lowercase()}" // Optimized: string interpolation
         }
         return reader.readMapObject(builder)
     }
 
     private fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
         check(this.type == BEType.INTEGER) {
-            "Can't read ${BEType.INTEGER.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
+            "Can't read ${BEType.INTEGER.name.lowercase()} from: ${type.name.lowercase()}" // Optimized: string interpolation
         }
         return reader.readIntegerObject(builder)
     }
 
     private fun readStringObject(builder: BEStringBuilder): BEString {
         check(this.type == BEType.STRING) {
-            "Can't read ${BEType.STRING.name.lowercase()} from: ${type.name.lowercase()}"  // Optimized: string interpolation
+            "Can't read ${BEType.STRING.name.lowercase()} from: ${type.name.lowercase()}" // Optimized: string interpolation
         }
         return reader.readStringObject(builder)
     }
-
-
 }
 
 const val DELIMITER: Char = ':'
@@ -63,7 +59,6 @@ const val EOF: Char = 'e'
 const val INTEGER_PREFIX: Char = 'i'
 const val LIST_PREFIX: Char = 'l'
 const val MAP_PREFIX: Char = 'd'
-
 
 internal fun createParser(reader: BEReader): BEParser {
     val type = getTypeForPrefix(reader.scannerPeek().toChar())
@@ -117,6 +112,5 @@ internal fun builderForType(type: BEType): BEObjectBuilder {
         BEType.MAP -> {
             BEMapBuilder()
         }
-
     }
 }

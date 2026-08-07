@@ -10,11 +10,10 @@ value class BEMap(private val map: Map<String, BEObject>) :
     override fun encodeTo(sink: Sink) {
         sink.bencodeMap()
 
-        
         val sortedEntries = map.entries
             .sortedBy { it.key }
             .map { (key, value) ->
-                Pair(key, value) 
+                Pair(key, value)
             }
 
         for ((key, value) in sortedEntries) {
@@ -29,5 +28,4 @@ value class BEMap(private val map: Map<String, BEObject>) :
     fun toMap(): Map<String, BEObject> {
         return map
     }
-
 }
