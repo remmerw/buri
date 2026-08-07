@@ -7,8 +7,7 @@ import kotlin.jvm.JvmInline
 value class BEString(private val content: ByteArray) : BEObject {
 
     override fun encodeTo(sink: Sink) {
-        val writer = BEWriter(sink)
-        writer.dataValue(content)
+        sink.bencode(content)
     }
 
     override fun toString(): String {
