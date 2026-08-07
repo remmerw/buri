@@ -7,23 +7,19 @@ import kotlin.jvm.JvmInline
 value class BEMap(private val map: Map<String, BEObject>) :
     BEObject {
 
-    override fun encodeTo(sink: Sink) {
-        sink.bencodeMap()
-
-        val sortedEntries = map.entries
-            .sortedBy { it.key }
-            .map { (key, value) ->
-                Pair(key, value)
-            }
-
-        for ((key, value) in sortedEntries) {
-            // Write key length and delimiter
+override fun encodeTo(sink: Sink) {
+    sink.bencodeMap()
+    
+    map.entries
+        .sortedBy { it.key }
+        .forEach { (key, value) ->
             sink.bencodeMapKey(key)
-            // Write value
             value.encodeTo(sink)
         }
-        sink.bencodeEof()
-    }
+    sink.bencodeEof()
+}
+
+    
 
     fun toMap(): Map<String, BEObject> {
         return map
