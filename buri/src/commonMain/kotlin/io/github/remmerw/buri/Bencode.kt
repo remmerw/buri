@@ -60,7 +60,7 @@ fun List<BEObject>.bencode(): BEList {
 }
 
 fun List<BEObject>.encodeBencodeTo(sink: Sink) {
-    return this.bencode().encodeTo(sink)
+    this.bencode().encodeTo(sink)
 }
 
 fun Map<String, BEObject>.bencode(): BEMap {
