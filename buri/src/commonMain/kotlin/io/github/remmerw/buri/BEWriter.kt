@@ -39,3 +39,39 @@ class BEWriter(val sink: Sink){
     }
  
 }
+
+fun Sink.writeBencode(content: ByteArray){
+ this.write(content.size.toString().encodeToByteArray())
+    this.writeByte(DELIMITER.code.toByte())
+    this.write(content)
+}
+
+fun Sink.writeBencode(value: Long){
+       sink.writeByte(INTEGER_PREFIX.code.toByte())
+   this.write(value.toString().encodeToByteArray())
+       this.writeByte(EOF.code.toByte())
+}
+
+
+fun Sink.bencodeEof(){
+   this.writeByte(EOF.code.toByte())
+}
+   
+fun Sink.bencodeMap(){
+   this.writeByte(MAP_PREFIX.code.toByte())
+}
+
+
+fun Sink.bencodeList(){
+   this.writeByte(LIST_PREFIX.code.toByte())
+}
+
+fun Sink.bencodeMapEntry(key: String){
+   val keyBytes = key.encodeToByteArray()
+      
+   // Write key length and delimiter
+        this.write(keyBytes.size.toString().encodeToByteArray())
+      
+   this.writeByte(DELIMITER.code.toByte())
+   this.write(keyBytes)
+}
