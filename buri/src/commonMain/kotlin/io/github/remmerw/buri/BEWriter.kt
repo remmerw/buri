@@ -19,13 +19,13 @@ class BEWriter(val sink: Sink){
         sink.writeByte(LIST_PREFIX.code.toByte())
     }
     
-    fun longValue(val value: Long){
+    fun longValue(value: Long){
        sink.writeByte(INTEGER_PREFIX.code.toByte())
    sink.write(value.toString().encodeToByteArray())
        eof()
     }
 
-    fun dataValue(val content: ByteArray){
+    fun dataValue(content: ByteArray){
                sink.write(content.size.toString().encodeToByteArray())
         sink.writeByte(DELIMITER.code.toByte())
         sink.write(content)
