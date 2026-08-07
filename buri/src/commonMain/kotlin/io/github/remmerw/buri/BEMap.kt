@@ -10,7 +10,7 @@ value class BEMap(private val map: Map<String, BEObject>) :
     override fun encodeTo(sink: Sink) {
         sink.bencodeMap()
 
-        // Optimized: pre-compute byte arrays to avoid double encoding
+        
         val sortedEntries = map.entries
             .sortedBy { it.key }
             .map { (key, value) ->
