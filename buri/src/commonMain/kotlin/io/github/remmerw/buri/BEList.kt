@@ -7,14 +7,13 @@ import kotlin.jvm.JvmInline
 value class BEList(private val list: List<BEObject>) : BEObject {
 
     override fun encodeTo(sink: Sink) {
-        val writer = BEWriter(sink)
-        writer.list()
+        sink.bencodeList()
 
         list.forEach { value ->
             value.encodeTo(sink)
         }
 
-        writer.eof()
+        sink.bencodeEof()
     }
 
     fun toList(): List<BEObject> {
