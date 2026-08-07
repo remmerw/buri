@@ -2,16 +2,24 @@ package io.github.remmerw.buri
 
 import kotlinx.io.Sink
 
-fun Sink.bencode(content: ByteArray) {
-    this.write(content.size.toString().encodeToByteArray())
+fun Sink.bencode(value: ByteArray) {
+    this.write(value.size.toString().encodeToByteArray())
     this.writeByte(DELIMITER.code.toByte())
-    this.write(content)
+    this.write(value)
+}
+
+fun Sink.bencode(value: String) {  
+    this.bencode(value.encodeToByteArray())
 }
 
 fun Sink.bencode(value: Long) {
     this.writeByte(INTEGER_PREFIX.code.toByte())
     this.write(value.toString().encodeToByteArray())
     this.writeByte(EOF.code.toByte())
+}
+
+fun Sink.bencode(value: Int) {  
+    this.bencode(value.toLong())
 }
 
 fun Sink.bencodeEof() {
