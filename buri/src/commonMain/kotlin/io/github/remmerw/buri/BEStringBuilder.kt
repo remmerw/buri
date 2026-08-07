@@ -22,7 +22,7 @@ internal class BEStringBuilder : BEObjectBuilder {
                 result = ByteArray(length)
                 return true
             }
-            if (!c.isDigit()) { 
+            if (!c.isDigit()) {
                 throw IllegalArgumentException("Unexpected token while reading string's length (as ASCII char): $c")
             }
             numericLength.append(c)
