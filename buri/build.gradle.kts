@@ -7,9 +7,11 @@ plugins {
 }
 
 group = "io.github.remmerw"
-version = "0.1.2"
+version = "0.1.5"
 
 kotlin {
+
+    jvmToolchain(21)
 
     android {
         namespace = "io.github.remmerw.buri"
