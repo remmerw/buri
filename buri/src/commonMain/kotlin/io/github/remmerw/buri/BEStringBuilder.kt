@@ -12,7 +12,7 @@ internal class BEStringBuilder : BEObjectBuilder {
             if (bytesAcceptedCount >= length) {
                 return false
             }
-            result[bytesAcceptedCount] = b.toByte()
+            result!![bytesAcceptedCount] = b.toByte()
             bytesAcceptedCount++
             return true
         } else {
@@ -32,9 +32,9 @@ internal class BEStringBuilder : BEObjectBuilder {
     }
 
     override fun build(): BEString {
-        check(result != null) { "Can't build string: no content" }
+        requireNotNull(result) { "Can't build string: no content" }
         check(bytesAcceptedCount >= length) { "Can't build string: insufficient content" }
-        return BEString(result!)
+        return BEString(result!!)
     }
 
     override fun type(): BEType {
