@@ -40,13 +40,13 @@ class BEWriter(val sink: Sink){
  
 }
 
-fun Sink.writeBencode(content: ByteArray){
+fun Sink.bencode(content: ByteArray){
  this.write(content.size.toString().encodeToByteArray())
     this.writeByte(DELIMITER.code.toByte())
     this.write(content)
 }
 
-fun Sink.writeBencode(value: Long){
+fun Sink.bencode(value: Long){
    this.writeByte(INTEGER_PREFIX.code.toByte())
    this.write(value.toString().encodeToByteArray())
    this.writeByte(EOF.code.toByte())
