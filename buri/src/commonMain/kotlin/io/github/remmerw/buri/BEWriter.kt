@@ -47,9 +47,9 @@ fun Sink.writeBencode(content: ByteArray){
 }
 
 fun Sink.writeBencode(value: Long){
-       sink.writeByte(INTEGER_PREFIX.code.toByte())
+   this.writeByte(INTEGER_PREFIX.code.toByte())
    this.write(value.toString().encodeToByteArray())
-       this.writeByte(EOF.code.toByte())
+   this.writeByte(EOF.code.toByte())
 }
 
 
