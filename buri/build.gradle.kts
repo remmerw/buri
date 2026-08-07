@@ -11,6 +11,8 @@ version = "0.1.4"
 
 kotlin {
 
+    jvmToolchain(21)
+
     android {
         namespace = "io.github.remmerw.buri"
         compileSdk = 37
