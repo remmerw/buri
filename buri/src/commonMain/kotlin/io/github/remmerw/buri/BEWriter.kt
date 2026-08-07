@@ -13,6 +13,13 @@ class BEWriter(val sink: Sink){
     }
 
     fun mapEntry(val key: String){
+       val keyBytes = key.encodeToByteArray()
+      
+       // Write key length and delimiter
+        sink.write(keyBytes.size.toString().encodeToByteArray())
+      sink.writeByte(DELIMITER.code.toByte())
+     
+      sink.write(keyBytes)
     }
    
     fun list(){
