@@ -26,30 +26,18 @@ internal class BEParser internal constructor(
     }
 
     private fun readListObject(builder: BEListBuilder): BEList {
-        check(this.type == BEType.LIST) {
-            "Can't read ${BEType.LIST.name.lowercase()} from: ${type.name.lowercase()}" // Optimized: string interpolation
-        }
         return reader.readListObject(builder)
     }
 
     private fun readMapObject(builder: BEMapBuilder): BEMap {
-        check(this.type == BEType.MAP) {
-            "Can't read ${BEType.MAP.name.lowercase()} from: ${type.name.lowercase()}" // Optimized: string interpolation
-        }
         return reader.readMapObject(builder)
     }
 
     private fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
-        check(this.type == BEType.INTEGER) {
-            "Can't read ${BEType.INTEGER.name.lowercase()} from: ${type.name.lowercase()}" // Optimized: string interpolation
-        }
         return reader.readIntegerObject(builder)
     }
 
     private fun readStringObject(builder: BEStringBuilder): BEString {
-        check(this.type == BEType.STRING) {
-            "Can't read ${BEType.STRING.name.lowercase()} from: ${type.name.lowercase()}" // Optimized: string interpolation
-        }
         return reader.readStringObject(builder)
     }
 }
