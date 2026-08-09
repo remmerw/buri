@@ -12,6 +12,7 @@ Bencode Library
 
 The bencoding format is described in https://www.bittorrent.org/beps/bep_0003.html
 
+Note: Maximal 2MB of bencode data can be processed
 
 ## Integration
 
