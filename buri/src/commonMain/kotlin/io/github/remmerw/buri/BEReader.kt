@@ -4,6 +4,12 @@ class BEReader(
     val data: ByteArray,
     val size: Int,
 ) {
+    init {
+        // Checks if sie is between 0 and MAX_SIZE (inclusive)
+        require(age in 0..MAX_SIZE) { 
+            "Invalid size" 
+        }
+    }
     private var pos: Int = 0
 
     fun exhausted(): Boolean = remaining() <= 0
