@@ -1,7 +1,6 @@
 package io.github.remmerw.buri
 
 internal abstract class BEPrefixedTypeBuilder : BEObjectBuilder {
-
     private var receivedPrefix = false
     private var receivedEOF = false
 

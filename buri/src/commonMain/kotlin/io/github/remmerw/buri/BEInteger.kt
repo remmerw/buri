@@ -4,17 +4,14 @@ import kotlinx.io.Sink
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class BEInteger(private val value: Long) : BEObject {
-
+value class BEInteger(
+    private val value: Long,
+) : BEObject {
     override fun encodeTo(sink: Sink) {
         sink.bencode(value)
     }
 
-    fun toLong(): Long {
-        return value
-    }
+    fun toLong(): Long = value
 
-    fun toInt(): Int {
-        return value.toInt()
-    }
+    fun toInt(): Int = value.toInt()
 }

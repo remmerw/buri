@@ -17,15 +17,9 @@ internal class BEListBuilder : BEPrefixedTypeBuilder() {
         return true
     }
 
-    override fun acceptEOF(): Boolean {
-        return builder == null
-    }
+    override fun acceptEOF(): Boolean = builder == null
 
-    override fun doBuild(): BEList {
-        return BEList(objects)
-    }
+    override fun doBuild(): BEList = BEList(objects)
 
-    override fun type(): BEType {
-        return BEType.LIST
-    }
+    override fun type(): BEType = BEType.LIST
 }

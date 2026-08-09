@@ -26,15 +26,9 @@ internal class BEMapBuilder internal constructor() : BEPrefixedTypeBuilder() {
         return true
     }
 
-    override fun doBuild(): BEMap {
-        return BEMap(map)
-    }
+    override fun doBuild(): BEMap = BEMap(map)
 
-    override fun acceptEOF(): Boolean {
-        return keyBuilder == null && valueBuilder == null
-    }
+    override fun acceptEOF(): Boolean = keyBuilder == null && valueBuilder == null
 
-    override fun type(): BEType {
-        return BEType.MAP
-    }
+    override fun type(): BEType = BEType.MAP
 }

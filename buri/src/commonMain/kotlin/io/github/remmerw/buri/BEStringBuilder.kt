@@ -37,7 +37,5 @@ internal class BEStringBuilder : BEObjectBuilder {
         return BEString(result!!)
     }
 
-    override fun type(): BEType {
-        return BEType.STRING
-    }
+    override fun type(): BEType = BEType.STRING
 }

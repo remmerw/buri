@@ -4,9 +4,9 @@ import kotlinx.io.Sink
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class BEMap(private val map: Map<String, BEObject>) :
-    BEObject {
-
+value class BEMap(
+    private val map: Map<String, BEObject>,
+) : BEObject {
     override fun encodeTo(sink: Sink) {
         sink.bencodeMap()
 
@@ -19,7 +19,5 @@ value class BEMap(private val map: Map<String, BEObject>) :
         sink.bencodeEof()
     }
 
-    fun toMap(): Map<String, BEObject> {
-        return map
-    }
+    fun toMap(): Map<String, BEObject> = map
 }
