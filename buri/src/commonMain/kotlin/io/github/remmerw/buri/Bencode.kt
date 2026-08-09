@@ -4,6 +4,8 @@ import kotlinx.io.Sink
 import kotlinx.io.Source
 import kotlinx.io.readByteArray
 
+internal const val MAX_SIZE: Int = 2 * 1024 * 1024 // 2 MB 
+
 fun decodeBencodeToString(source: Source): String = (source.decodeBencode() as BEString).toString()
 
 fun decodeBencodeToLong(source: Source): Long = (source.decodeBencode() as BEInteger).toLong()
