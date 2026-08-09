@@ -6,7 +6,7 @@ class BEReader(
 ) {
     init {
         // Checks if sie is between 0 and MAX_SIZE (inclusive)
-        require(age in 0..MAX_SIZE) { 
+        require(size in 0..MAX_SIZE) { 
             "Invalid size" 
         }
     }
