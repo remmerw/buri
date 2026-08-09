@@ -6,10 +6,11 @@ class BEReader(
 ) {
     init {
         // Checks if sie is between 0 and MAX_SIZE (inclusive)
-        require(size in 0..MAX_SIZE) { 
-            "Invalid size" 
+        require(size in 0..MAX_SIZE) {
+            "Invalid size"
         }
     }
+
     private var pos: Int = 0
 
     fun exhausted(): Boolean = remaining() <= 0

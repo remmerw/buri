@@ -18,10 +18,10 @@ internal class BEStringBuilder : BEObjectBuilder {
         } else {
             if (c == DELIMITER) {
                 bytesAcceptedCount = 0
-                length = numericLength.toString().toInt() 
-                require(length in 0..MAX_SIZE) { 
-            "Invalid length" 
-        }
+                length = numericLength.toString().toInt()
+                require(length in 0..MAX_SIZE) {
+                    "Invalid length"
+                }
                 result = ByteArray(length)
                 return true
             }
