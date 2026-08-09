@@ -7,7 +7,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 class Tests {
-
     @Test
     fun encodeDecodeString() {
         val testData = "hi"
@@ -46,10 +45,11 @@ class Tests {
 
     @Test
     fun encodeDecodeList() {
-        val value: List<BEObject> = listOf(
-            555L.bencode(),
-            "hello".bencode(),
-        )
+        val value: List<BEObject> =
+            listOf(
+                555L.bencode(),
+                "hello".bencode(),
+            )
         val buffer = Buffer()
         value.encodeBencodeTo(buffer)
 
@@ -73,10 +73,11 @@ class Tests {
     @Test
     fun examplesList() {
         // prepare data
-        val value: List<BEObject> = listOf(
-            555L.bencode(),
-            "hello".bencode(),
-        )
+        val value: List<BEObject> =
+            listOf(
+                555L.bencode(),
+                "hello".bencode(),
+            )
         val buffer = Buffer()
 
         // encode

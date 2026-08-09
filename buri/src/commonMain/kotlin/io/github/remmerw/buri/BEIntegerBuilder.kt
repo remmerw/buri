@@ -12,15 +12,9 @@ internal class BEIntegerBuilder : BEPrefixedTypeBuilder() {
         throw IllegalArgumentException("Unexpected token while reading integer (as ASCII char): $c") // Optimized: string interpolation
     }
 
-    override fun acceptEOF(): Boolean {
-        return true
-    }
+    override fun acceptEOF(): Boolean = true
 
-    override fun type(): BEType {
-        return BEType.INTEGER
-    }
+    override fun type(): BEType = BEType.INTEGER
 
-    override fun doBuild(): BEInteger {
-        return BEInteger(stringBuilder.toString().toLong())
-    }
+    override fun doBuild(): BEInteger = BEInteger(stringBuilder.toString().toLong())
 }

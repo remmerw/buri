@@ -4,8 +4,9 @@ import kotlinx.io.Sink
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class BEList(private val list: List<BEObject>) : BEObject {
-
+value class BEList(
+    private val list: List<BEObject>,
+) : BEObject {
     override fun encodeTo(sink: Sink) {
         sink.bencodeList()
 
@@ -16,7 +17,5 @@ value class BEList(private val list: List<BEObject>) : BEObject {
         sink.bencodeEof()
     }
 
-    fun toList(): List<BEObject> {
-        return list
-    }
+    fun toList(): List<BEObject> = list
 }

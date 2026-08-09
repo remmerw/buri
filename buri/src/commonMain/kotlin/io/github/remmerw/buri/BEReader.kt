@@ -1,19 +1,16 @@
 package io.github.remmerw.buri
 
-class BEReader(val data: ByteArray, val size: Int) {
+class BEReader(
+    val data: ByteArray,
+    val size: Int,
+) {
     private var pos: Int = 0
 
-    fun exhausted(): Boolean {
-        return remaining() <= 0
-    }
+    fun exhausted(): Boolean = remaining() <= 0
 
-    fun remaining(): Int {
-        return size - pos
-    }
+    fun remaining(): Int = size - pos
 
-    fun peek(): Byte {
-        return data[pos]
-    }
+    fun peek(): Byte = data[pos]
 
     fun read(): Byte {
         val byte = data[pos]
@@ -44,19 +41,11 @@ class BEReader(val data: ByteArray, val size: Int) {
         return builder.build()
     }
 
-    internal fun readMapObject(builder: BEMapBuilder): BEMap {
-        return readObject(builder) as BEMap
-    }
+    internal fun readMapObject(builder: BEMapBuilder): BEMap = readObject(builder) as BEMap
 
-    internal fun readListObject(builder: BEListBuilder): BEList {
-        return readObject(builder) as BEList
-    }
+    internal fun readListObject(builder: BEListBuilder): BEList = readObject(builder) as BEList
 
-    internal fun readStringObject(builder: BEStringBuilder): BEString {
-        return readObject(builder) as BEString
-    }
+    internal fun readStringObject(builder: BEStringBuilder): BEString = readObject(builder) as BEString
 
-    internal fun readIntegerObject(builder: BEIntegerBuilder): BEInteger {
-        return readObject(builder) as BEInteger
-    }
+    internal fun readIntegerObject(builder: BEIntegerBuilder): BEInteger = readObject(builder) as BEInteger
 }
