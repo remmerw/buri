@@ -4,9 +4,12 @@ class Buffer(private val data: ByteArray) {
 
     private var index: Int = 0
 
-    // Kotlin-Property statt Funktion length()
     val length: Int
         get() = index
+
+    val remaining: Int
+        get() = data.size - index
+
 
     fun writeByte(byte: Byte) {
         if (index < data.size) {
