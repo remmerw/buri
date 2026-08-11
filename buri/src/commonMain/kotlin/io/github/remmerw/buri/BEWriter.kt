@@ -71,7 +71,7 @@ fun Buffer.bencode(value: Long) {
     this.writeByte(EOF.code.toByte())
 }
 
-fun Buffet.bencode(value: Int) {
+fun Buffer.bencode(value: Int) {
     this.bencode(value.toLong())
 }
 
