@@ -18,6 +18,7 @@ value class BEMap(
             }
         sink.bencodeEof()
     }
+
     override fun encodeTo(buffer: Buffer) {
         buffer.bencodeMap()
 
@@ -29,5 +30,6 @@ value class BEMap(
             }
         buffer.bencodeEof()
     }
+
     fun toMap(): Map<String, BEObject> = map
 }

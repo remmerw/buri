@@ -16,6 +16,7 @@ value class BEList(
 
         sink.bencodeEof()
     }
+
     override fun encodeTo(buffer: Buffer) {
         buffer.bencodeList()
 
@@ -25,5 +26,6 @@ value class BEList(
 
         buffer.bencodeEof()
     }
+
     fun toList(): List<BEObject> = list
 }
