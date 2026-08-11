@@ -8,7 +8,7 @@ class Buffer(private val data: ByteArray) {
     val length: Int
         get() = index
 
-    fun writeBuffer(byte: Byte) {
+    fun writeByte(byte: Byte) {
         if (index < data.size) {
             data[index] = byte
             index++
