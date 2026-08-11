@@ -1,3 +1,5 @@
+package io.github.remmerw.buri
+
 class Buffer(private val data: ByteArray) {
     
     constructor(size: Int) : this(ByteArray(size))
