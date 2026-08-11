@@ -10,7 +10,9 @@ value class BEString(
     override fun encodeTo(sink: Sink) {
         sink.bencode(content)
     }
-
+    override fun encodeTo(buffer: Buffer) {
+        buffer.bencode(content)
+    }
     override fun toString(): String = content.decodeToString()
 
     fun toByteArray(): ByteArray = content
