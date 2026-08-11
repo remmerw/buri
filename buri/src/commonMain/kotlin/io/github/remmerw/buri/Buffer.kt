@@ -1,7 +1,8 @@
 package io.github.remmerw.buri
 
-class Buffer(private val data: ByteArray) {
-    
+class Buffer(
+    private val data: ByteArray,
+) {
     constructor(size: Int) : this(ByteArray(size))
 
     private var index: Int = 0
@@ -11,7 +12,6 @@ class Buffer(private val data: ByteArray) {
 
     val remaining: Int
         get() = data.size - index
-
 
     fun writeByte(byte: Byte) {
         if (index < data.size) {
@@ -34,5 +34,4 @@ class Buffer(private val data: ByteArray) {
     fun reset() {
         index = 0
     }
-
 }
