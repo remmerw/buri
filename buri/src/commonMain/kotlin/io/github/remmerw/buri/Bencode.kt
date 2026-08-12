@@ -1,18 +1,14 @@
 package io.github.remmerw.buri
 
-import kotlinx.io.Sink
-import kotlinx.io.Source
-import kotlinx.io.readByteArray
-
 internal const val MAX_SIZE: Int = 2 * 1024 * 1024 // 2 MB
 
-fun decodeBencodeToString(source: Source): String = (source.decodeBencode() as BEString).toString()
+fun decodeBencodeToString(source: Buffer): String = (source.decodeBencode() as BEString).toString()
 
-fun decodeBencodeToLong(source: Source): Long = (source.decodeBencode() as BEInteger).toLong()
+fun decodeBencodeToLong(source: Buffer): Long = (source.decodeBencode() as BEInteger).toLong()
 
-fun decodeBencodeToMap(source: Source): Map<String, BEObject> = (source.decodeBencode() as BEMap).toMap()
+fun decodeBencodeToMap(source: Buffer): Map<String, BEObject> = (source.decodeBencode() as BEMap).toMap()
 
-fun decodeBencodeToList(source: Source): List<BEObject> = (source.decodeBencode() as BEList).toList()
+fun decodeBencodeToList(source: Buffer): List<BEObject> = (source.decodeBencode() as BEList).toList()
 
 fun BEReader.decodeBencode(): BEObject {
     val parser = createParser(this)
@@ -24,9 +20,9 @@ fun BEReader.decodeBencode(): BEObject {
     }
 }
 
-fun Source.decodeBencode(): BEObject {
+fun Buffer.decodeBencode(): BEObject {
     val data = this.readByteArray()
-    return BEReader(data, data.size).decodeBencode()
+    return BEReader(this.data, this.size).decodeBencode()
 }
 
 fun Byte.bencode(): BEInteger = BEInteger(toLong())
@@ -47,6 +43,6 @@ fun List<BEObject>.encodeBencodeTo(sink: Sink) {
 
 fun Map<String, BEObject>.bencode(): BEMap = BEMap(this)
 
-fun Map<String, BEObject>.encodeBencodeTo(sink: Sink) {
+fun Map<String, BEObject>.encodeBencodeTo(sink: Buffer) {
     this.bencode().encodeTo(sink)
 }
