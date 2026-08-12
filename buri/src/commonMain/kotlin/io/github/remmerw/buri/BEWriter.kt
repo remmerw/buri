@@ -48,8 +48,7 @@ fun Sink.bencodeMapKey(key: String) {
     this.write(keyBytes)
 }
 
-
-fun Buffer.bencodeArray(size: Int){
+fun Buffer.bencodeArray(size: Int) {
     this.write(size.toString().encodeToByteArray())
     this.writeByte(DELIMITER.code.toByte())
 }
