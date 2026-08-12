@@ -40,7 +40,9 @@ kotlin {
         val value: List<BEObject> = listOf(
             555L.bencode(), "hello".bencode()
         )
-        val buffer = Buffer()
+
+        // buffer of 200 bytes
+        val buffer = Buffer(200)
         
         // encode
         value.encodeBencodeTo(buffer)
