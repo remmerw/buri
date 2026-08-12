@@ -63,7 +63,7 @@ fun Buffer.bencodeArrayData(value: UShort) {
     this.writeByte((value.toInt() and 0xFF).toByte())
 }
 
-fun Buffer.bencodeArrayData(byte: Byte) {
+fun Buffer.bencodeArrayData(value: Byte) {
     this.writeByte(value)
 }
 
