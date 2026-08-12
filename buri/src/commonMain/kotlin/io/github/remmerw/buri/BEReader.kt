@@ -5,7 +5,7 @@ class BEReader(
     val size: Int,
 ) {
     init {
-        // Checks if sie is between 0 and MAX_SIZE (inclusive)
+        // Checks if size is between 0 and MAX_SIZE (inclusive)
         require(size in 0..MAX_SIZE) {
             "Invalid size"
         }
