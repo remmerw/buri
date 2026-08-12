@@ -58,13 +58,18 @@ fun Buffer.bencodeArrayData(value: ByteArray) {
     this.write(value)
 }
 
+fun Buffer.bencodeArrayData(value: UShort) {
+    this.writeByte((value.toInt() shr 8).toByte())
+    this.writeByte((value.toInt() and 0xFF).toByte())
+}
+
 fun Buffer.bencodeArrayData(byte: Byte) {
     this.writeByte(value)
 }
 
 fun Buffer.bencode(value: ByteArray) {
-    this.writeArray(value.size)
-    this.writeArrayData(value)
+    this.bencodeArray(value.size)
+    this.bencodeArrayData(value)
 }
 
 fun Buffer.bencode(value: BEObject) {
