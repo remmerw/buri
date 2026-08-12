@@ -21,7 +21,6 @@ fun BEReader.decodeBencode(): BEObject {
 }
 
 fun Buffer.decodeBencode(): BEObject {
-    val data = this.readByteArray()
     return BEReader(this.data, this.size).decodeBencode()
 }
 
