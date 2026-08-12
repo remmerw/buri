@@ -36,7 +36,7 @@ fun ByteArray.bencode(): BEString = BEString(this)
 
 fun List<BEObject>.bencode(): BEList = BEList(this)
 
-fun List<BEObject>.encodeBencodeTo(sink: Sink) {
+fun List<BEObject>.encodeBencodeTo(sink: Buffer) {
     this.bencode().encodeTo(sink)
 }
 
