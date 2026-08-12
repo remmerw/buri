@@ -6,7 +6,6 @@ import kotlin.jvm.JvmInline
 value class BEMap(
     private val map: Map<String, BEObject>,
 ) : BEObject {
-
     override fun encodeTo(buffer: Buffer) {
         buffer.bencodeMap()
 

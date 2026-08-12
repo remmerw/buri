@@ -6,7 +6,6 @@ import kotlin.jvm.JvmInline
 value class BEString(
     private val content: ByteArray,
 ) : BEObject {
-
     override fun encodeTo(buffer: Buffer) {
         buffer.bencode(content)
     }

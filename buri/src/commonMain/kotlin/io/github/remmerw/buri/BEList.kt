@@ -6,7 +6,6 @@ import kotlin.jvm.JvmInline
 value class BEList(
     private val list: List<BEObject>,
 ) : BEObject {
-
     override fun encodeTo(buffer: Buffer) {
         buffer.bencodeList()
 
