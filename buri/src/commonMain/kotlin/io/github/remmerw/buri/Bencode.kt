@@ -21,7 +21,7 @@ fun BEReader.decodeBencode(): BEObject {
 }
 
 fun Buffer.decodeBencode(): BEObject {
-    return BEReader(this.data, this.size).decodeBencode()
+    return BEReader(this.data, this.length).decodeBencode()
 }
 
 fun Byte.bencode(): BEInteger = BEInteger(toLong())
