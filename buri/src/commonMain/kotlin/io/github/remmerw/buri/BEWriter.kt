@@ -85,7 +85,7 @@ fun Sink.bencodeArrayData(value: Byte) {
     this.writeByte(value)
 }
 
-fun Sunk.bencode(value: ByteArray) {
+fun Sink.bencode(value: ByteArray) {
     this.bencodeArray(value.size)
     this.bencodeArrayData(value)
 }
