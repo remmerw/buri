@@ -45,7 +45,7 @@ kotlin {
         val buffer = Buffer(200)
         
         // encode
-        value.encodeBencodeTo(buffer)
+        value.bencode().encodeTo(buffer)
 
         // decode
         val list = (buffer.decodeBencode() as BEList).toList()
