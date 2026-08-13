@@ -2,13 +2,13 @@ package io.github.remmerw.buri
 
 internal const val MAX_SIZE: Int = 2 * 1024 * 1024 // 2 MB
 
-fun decodeBencodeToString(source: Buffer): String = (source.decodeBencode() as BEString).toString()
+fun decodeBencodeToString(buffer: Buffer): String = (buffer.decodeBencode() as BEString).toString()
 
-fun decodeBencodeToLong(source: Buffer): Long = (source.decodeBencode() as BEInteger).toLong()
+fun decodeBencodeToLong(buffer: Buffer): Long = (buffer.decodeBencode() as BEInteger).toLong()
 
-fun decodeBencodeToMap(source: Buffer): Map<String, BEObject> = (source.decodeBencode() as BEMap).toMap()
+fun decodeBencodeToMap(buffer: Buffer): Map<String, BEObject> = (buffer.decodeBencode() as BEMap).toMap()
 
-fun decodeBencodeToList(source: Buffer): List<BEObject> = (source.decodeBencode() as BEList).toList()
+fun decodeBencodeToList(buffer: Buffer): List<BEObject> = (buffer.decodeBencode() as BEList).toList()
 
 fun BEReader.decodeBencode(): BEObject {
     val parser = createParser(this)
@@ -22,6 +22,8 @@ fun BEReader.decodeBencode(): BEObject {
 
 fun Buffer.decodeBencode(): BEObject = BEReader(this.data, this.length).decodeBencode()
 
+
+
 fun Byte.bencode(): BEInteger = BEInteger(toLong())
 
 fun Int.bencode(): BEInteger = BEInteger(toLong())
@@ -34,12 +36,4 @@ fun ByteArray.bencode(): BEString = BEString(this)
 
 fun List<BEObject>.bencode(): BEList = BEList(this)
 
-fun List<BEObject>.encodeBencodeTo(sink: Buffer) {
-    this.bencode().encodeTo(sink)
-}
-
 fun Map<String, BEObject>.bencode(): BEMap = BEMap(this)
-
-fun Map<String, BEObject>.encodeBencodeTo(sink: Buffer) {
-    this.bencode().encodeTo(sink)
-}
