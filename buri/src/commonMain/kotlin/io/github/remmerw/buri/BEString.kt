@@ -11,8 +11,8 @@ value class BEString(
         buffer.bencode(content)
     }
 
-    override fun encodeTo(buffer: Sink) {
-        buffer.bencode(content)
+    override fun encodeTo(sink: Sink) {
+        sink.bencode(content)
     }
 
     override fun toString(): String = content.decodeToString()
