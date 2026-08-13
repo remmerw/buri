@@ -44,8 +44,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-               implementation(libs.kotlin.stdlib)
-               implementation(libs.kotlinx.io.core)
+                implementation(libs.kotlin.stdlib)
+                implementation(libs.kotlinx.io.core)
             }
         }
 
