@@ -19,16 +19,16 @@ value class BEMap(
         buffer.bencodeEof()
     }
 
-    override fun encodeTo(buffer: Sink) {
-        buffer.bencodeMap()
+    override fun encodeTo(sunk: Sink) {
+        sink.bencodeMap()
 
         map.entries
             .sortedBy { it.key }
             .forEach { (key, value) ->
-                buffer.bencodeMapKey(key)
-                value.encodeTo(buffer)
+                sink.bencodeMapKey(key)
+                value.encodeTo(sink)
             }
-        buffer.bencodeEof()
+        sink.bencodeEof()
     }
 
     fun toMap(): Map<String, BEObject> = map
