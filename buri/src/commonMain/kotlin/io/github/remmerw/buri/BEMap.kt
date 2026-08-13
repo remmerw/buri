@@ -1,8 +1,7 @@
 package io.github.remmerw.buri
 
-import kotlin.jvm.JvmInline
 import kotlinx.io.Sink
-
+import kotlin.jvm.JvmInline
 
 @JvmInline
 value class BEMap(
@@ -19,7 +18,8 @@ value class BEMap(
             }
         buffer.bencodeEof()
     }
-override fun encodeTo(buffer: Sink) {
+
+    override fun encodeTo(buffer: Sink) {
         buffer.bencodeMap()
 
         map.entries
