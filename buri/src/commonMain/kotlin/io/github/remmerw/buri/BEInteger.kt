@@ -11,8 +11,8 @@ value class BEInteger(
         buffer.bencode(value)
     }
 
-    override fun encodeTo(buffer: Sink) {
-        buffer.bencode(value)
+    override fun encodeTo(sink: Sink) {
+        sink.bencode(value)
     }
 
     fun toLong(): Long = value
