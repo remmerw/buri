@@ -17,14 +17,14 @@ value class BEList(
         buffer.bencodeEof()
     }
 
-    override fun encodeTo(buffer: Sink) {
-        buffer.bencodeList()
+    override fun encodeTo(sink: Sink) {
+        sink.bencodeList()
 
         list.forEach { value ->
-            value.encodeTo(buffer)
+            value.encodeTo(sink)
         }
 
-        buffer.bencodeEof()
+        sink.bencodeEof()
     }
 
     fun toList(): List<BEObject> = list
