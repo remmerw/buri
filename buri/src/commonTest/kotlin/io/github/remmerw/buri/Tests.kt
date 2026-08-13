@@ -28,7 +28,7 @@ class Tests {
     fun encodeDecodeEmptyList() {
         val value: List<BEObject> = emptyList()
         val buffer = Buffer(100)
-        value.encodeBencodeTo(buffer)
+        value.bencode().encodeTo(buffer)
         val cmp = decodeBencodeToList(buffer)
         assertEquals(cmp, value)
     }
@@ -37,7 +37,7 @@ class Tests {
     fun encodeDecodeEmptyMap() {
         val value: Map<String, BEObject> = emptyMap()
         val buffer = Buffer(100)
-        value.encodeBencodeTo(buffer)
+        value.bencode().encodeTo(buffer)
         val cmp = decodeBencodeToMap(buffer)
         assertEquals(cmp, value)
     }
@@ -50,7 +50,7 @@ class Tests {
                 "hello".bencode(),
             )
         val buffer = Buffer(200)
-        value.encodeBencodeTo(buffer)
+        value.bencode().encodeTo(buffer)
 
         val list = decodeBencodeToList(buffer)
         assertEquals(value.size, list.size)
@@ -80,7 +80,7 @@ class Tests {
         val buffer = Buffer(200)
 
         // encode
-        value.encodeBencodeTo(buffer)
+        value.bencode().encodeTo(buffer)
 
         // decode
         val list = (buffer.decodeBencode() as BEList).toList()
