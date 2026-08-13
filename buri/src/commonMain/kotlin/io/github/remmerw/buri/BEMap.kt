@@ -19,7 +19,7 @@ value class BEMap(
         buffer.bencodeEof()
     }
 
-    override fun encodeTo(sunk: Sink) {
+    override fun encodeTo(sink: Sink) {
         sink.bencodeMap()
 
         map.entries
