@@ -1,57 +1,58 @@
 package io.github.remmerw.buri
 
 import kotlinx.io.Sink
+import java.nio.ByteBuffer
 
-fun Buffer.bencodeArray(size: Int) {
+fun ByteBuffer.bencodeArray(size: Int) {
     this.write(size.toString().encodeToByteArray())
     this.writeByte(DELIMITER.code.toByte())
 }
 
-fun Buffer.bencodeArrayData(value: ByteArray) {
+fun ByteBuffer.bencodeArrayData(value: ByteArray) {
     this.write(value)
 }
 
-fun Buffer.bencodeArrayData(value: UShort) {
+fun ByteBuffer.bencodeArrayData(value: UShort) {
     this.writeByte((value.toInt() shr 8).toByte())
     this.writeByte((value.toInt() and 0xFF).toByte())
 }
 
-fun Buffer.bencodeArrayData(value: Byte) {
+fun ByteBuffer.bencodeArrayData(value: Byte) {
     this.writeByte(value)
 }
 
-fun Buffer.bencode(value: ByteArray) {
+fun ByteBuffer.bencode(value: ByteArray) {
     this.bencodeArray(value.size)
     this.bencodeArrayData(value)
 }
 
-fun Buffer.bencode(value: String) {
+fun ByteBuffer.bencode(value: String) {
     this.bencode(value.encodeToByteArray())
 }
 
-fun Buffer.bencode(value: Long) {
+fun ByteBuffer.bencode(value: Long) {
     this.writeByte(INTEGER_PREFIX.code.toByte())
     this.write(value.toString().encodeToByteArray())
     this.writeByte(EOF.code.toByte())
 }
 
-fun Buffer.bencode(value: Int) {
+fun ByteBuffer.bencode(value: Int) {
     this.bencode(value.toLong())
 }
 
-fun Buffer.bencodeEof() {
+fun ByteBuffer.bencodeEof() {
     this.writeByte(EOF.code.toByte())
 }
 
-fun Buffer.bencodeMap() {
+fun ByteBuffer.bencodeMap() {
     this.writeByte(MAP_PREFIX.code.toByte())
 }
 
-fun Buffer.bencodeList() {
+fun ByteBuffer.bencodeList() {
     this.writeByte(LIST_PREFIX.code.toByte())
 }
 
-fun Buffer.bencodeMapKey(key: String) {
+fun ByteBuffer.bencodeMapKey(key: String) {
     val keyBytes = key.encodeToByteArray()
 
     // Write key length and delimiter
