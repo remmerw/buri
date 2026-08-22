@@ -9,7 +9,7 @@ fun ByteBuffer.bencodeArray(size: Int) {
 }
 
 fun ByteBuffer.bencodeArrayData(value: ByteArray) {
-    this.write(value)
+    this.put(value)
 }
 
 fun ByteBuffer.bencodeArrayData(value: UShort) {
@@ -32,7 +32,7 @@ fun ByteBuffer.bencode(value: String) {
 
 fun ByteBuffer.bencode(value: Long) {
     this.put(INTEGER_PREFIX.code.toByte())
-    this.write(value.toString().encodeToByteArray())
+    this.put(value.toString().encodeToByteArray())
     this.put(EOF.code.toByte())
 }
 
