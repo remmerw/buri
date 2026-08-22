@@ -11,7 +11,6 @@ Bencode Library
 
 The bencoding format is described in https://www.bittorrent.org/beps/bep_0003.html
 
-Note: Maximal 2MB of a encoded bencode data can be decoded (Limitation)
 
 ## Integration
 
@@ -21,7 +20,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             ...
-            implementation("io.github.remmerw:buri:0.2.1")
+            implementation("io.github.remmerw:buri:0.2.2")
         }
         ...
     }
