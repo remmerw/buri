@@ -9,7 +9,7 @@ class BEReader(
 
     fun remaining(): Int = data.remaining()
 
-    fun read(): Byte = data.readByte()
+    fun read(): Byte = data.get()
 
     fun peek(): Byte {
         val pos = data.position()
