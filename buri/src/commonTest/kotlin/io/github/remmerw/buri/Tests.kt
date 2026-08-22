@@ -1,10 +1,10 @@
 package io.github.remmerw.buri
 
+import java.nio.ByteBuffer
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
-import java.nio.ByteBuffer
 
 class Tests {
     @Test
@@ -22,7 +22,7 @@ class Tests {
         val value = 6666L
         val buffer = ByteBuffer.allocate(100)
         value.bencode().encodeTo(buffer)
-buffer.flip()
+        buffer.flip()
         val cmp = decodeBencodeToLong(buffer)
         assertEquals(cmp, value)
     }
@@ -32,7 +32,7 @@ buffer.flip()
         val value: List<BEObject> = emptyList()
         val buffer = ByteBuffer.allocate(100)
         value.bencode().encodeTo(buffer)
-buffer.flip()
+        buffer.flip()
         val cmp = decodeBencodeToList(buffer)
         assertEquals(cmp, value)
     }
@@ -42,7 +42,7 @@ buffer.flip()
         val value: Map<String, BEObject> = emptyMap()
         val buffer = ByteBuffer.allocate(100)
         value.bencode().encodeTo(buffer)
-buffer.flip()
+        buffer.flip()
         val cmp = decodeBencodeToMap(buffer)
         assertEquals(cmp, value)
     }
@@ -56,7 +56,7 @@ buffer.flip()
             )
         val buffer = ByteBuffer.allocate(200)
         value.bencode().encodeTo(buffer)
-buffer.flip()
+        buffer.flip()
 
         val list = decodeBencodeToList(buffer)
         assertEquals(value.size, list.size)
@@ -87,7 +87,7 @@ buffer.flip()
 
         // encode
         value.bencode().encodeTo(buffer)
-buffer.flip()
+        buffer.flip()
         // decode
         val list = (buffer.decodeBencode() as BEList).toList()
 
