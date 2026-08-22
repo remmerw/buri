@@ -1,13 +1,14 @@
 package io.github.remmerw.buri
 
 import kotlinx.io.Sink
+import java.nio.ByteBuffer
 import kotlin.jvm.JvmInline
 
 @JvmInline
 value class BEMap(
     private val map: Map<String, BEObject>,
 ) : BEObject {
-    override fun encodeTo(buffer: Buffer) {
+    override fun encodeTo(buffer: ByteBuffer) {
         buffer.bencodeMap()
 
         map.entries
