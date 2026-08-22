@@ -4,13 +4,15 @@ import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import java.nio.ByteBuffer
 
 class Tests {
     @Test
     fun encodeDecodeString() {
         val testData = "hi"
-        val buffer = Buffer(100)
+        val buffer = ByteBuffer.allocate(100)
         testData.bencode().encodeTo(buffer)
+        buffer.flip()
         val cmp = decodeBencodeToString(buffer)
         assertEquals(cmp, testData)
     }
@@ -18,8 +20,9 @@ class Tests {
     @Test
     fun encodeDecodeInteger() {
         val value = 6666L
-        val buffer = Buffer(100)
+        val buffer = ByteBuffer.allocate(100)
         value.bencode().encodeTo(buffer)
+buffer.flip()
         val cmp = decodeBencodeToLong(buffer)
         assertEquals(cmp, value)
     }
@@ -27,8 +30,9 @@ class Tests {
     @Test
     fun encodeDecodeEmptyList() {
         val value: List<BEObject> = emptyList()
-        val buffer = Buffer(100)
+        val buffer = ByteBuffer.allocate(100)
         value.bencode().encodeTo(buffer)
+buffer.flip()
         val cmp = decodeBencodeToList(buffer)
         assertEquals(cmp, value)
     }
@@ -36,8 +40,9 @@ class Tests {
     @Test
     fun encodeDecodeEmptyMap() {
         val value: Map<String, BEObject> = emptyMap()
-        val buffer = Buffer(100)
+        val buffer = ByteBuffer.allocate(100)
         value.bencode().encodeTo(buffer)
+buffer.flip()
         val cmp = decodeBencodeToMap(buffer)
         assertEquals(cmp, value)
     }
@@ -49,8 +54,9 @@ class Tests {
                 555L.bencode(),
                 "hello".bencode(),
             )
-        val buffer = Buffer(200)
+        val buffer = ByteBuffer.allocate(200)
         value.bencode().encodeTo(buffer)
+buffer.flip()
 
         val list = decodeBencodeToList(buffer)
         assertEquals(value.size, list.size)
@@ -77,11 +83,11 @@ class Tests {
                 555L.bencode(),
                 "hello".bencode(),
             )
-        val buffer = Buffer(200)
+        val buffer = ByteBuffer.allocate(200)
 
         // encode
         value.bencode().encodeTo(buffer)
-
+buffer.flip()
         // decode
         val list = (buffer.decodeBencode() as BEList).toList()
 
