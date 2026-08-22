@@ -3,7 +3,7 @@ package io.github.remmerw.buri
 import java.nio.ByteBuffer
 
 class BEReader(
-    val data: ByteBuffer
+    val data: ByteBuffer,
 ) {
     fun exhausted(): Boolean = data.hasRemaining()
 
