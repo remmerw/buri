@@ -1,14 +1,16 @@
 package io.github.remmerw.buri
 
+import java.nio.ByteBuffer
+
 internal const val MAX_SIZE: Int = 2 * 1024 * 1024 // 2 MB
 
-fun decodeBencodeToString(buffer: Buffer): String = (buffer.decodeBencode() as BEString).toString()
+fun decodeBencodeToString(buffer: ByteBuffer): String = (buffer.decodeBencode() as BEString).toString()
 
-fun decodeBencodeToLong(buffer: Buffer): Long = (buffer.decodeBencode() as BEInteger).toLong()
+fun decodeBencodeToLong(buffer: ByteBuffer): Long = (buffer.decodeBencode() as BEInteger).toLong()
 
-fun decodeBencodeToMap(buffer: Buffer): Map<String, BEObject> = (buffer.decodeBencode() as BEMap).toMap()
+fun decodeBencodeToMap(buffer: ByteBuffer): Map<String, BEObject> = (buffer.decodeBencode() as BEMap).toMap()
 
-fun decodeBencodeToList(buffer: Buffer): List<BEObject> = (buffer.decodeBencode() as BEList).toList()
+fun decodeBencodeToList(buffer: ByteBuffer): List<BEObject> = (buffer.decodeBencode() as BEList).toList()
 
 fun BEReader.decodeBencode(): BEObject {
     val parser = createParser(this)
@@ -20,7 +22,7 @@ fun BEReader.decodeBencode(): BEObject {
     }
 }
 
-fun Buffer.decodeBencode(): BEObject = BEReader(this.data, this.length).decodeBencode()
+fun ByteBuffer.decodeBencode(): BEObject = BEReader(this).decodeBencode()
 
 fun Byte.bencode(): BEInteger = BEInteger(toLong())
 
