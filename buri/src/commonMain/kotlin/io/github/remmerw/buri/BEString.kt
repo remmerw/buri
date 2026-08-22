@@ -1,13 +1,14 @@
 package io.github.remmerw.buri
 
 import kotlinx.io.Sink
+import java.nio.ByteBuffer
 import kotlin.jvm.JvmInline
 
 @JvmInline
 value class BEString(
     private val content: ByteArray,
 ) : BEObject {
-    override fun encodeTo(buffer: Buffer) {
+    override fun encodeTo(buffer: ByteBuffer) {
         buffer.bencode(content)
     }
 
