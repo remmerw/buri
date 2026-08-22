@@ -1,27 +1,20 @@
 package io.github.remmerw.buri
 
+import java.nio.ByteBuffer
+
 class BEReader(
-    val data: ByteArray,
-    val size: Int,
+    val data: ByteBuffer
 ) {
-    init {
-        // Checks if size is between 0 and MAX_SIZE (inclusive)
-        require(size in 0..MAX_SIZE) {
-            "Invalid size"
-        }
-    }
+    fun exhausted(): Boolean = data.hasRemaining()
 
-    private var pos: Int = 0
+    fun remaining(): Int = data.remaining()
 
-    fun exhausted(): Boolean = remaining() <= 0
+    fun read(): Byte = data.readByte()
 
-    fun remaining(): Int = size - pos
-
-    fun peek(): Byte = data[pos]
-
-    fun read(): Byte {
-        val byte = data[pos]
-        pos++
+    fun peek(): Byte {
+        val pos = data.position()
+        val byte = read()
+        data.position(pos)
         return byte
     }
 
