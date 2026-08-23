@@ -62,6 +62,20 @@ class Tests {
         val cmp = decodeBencodeToMap(buffer)
         assertEquals(cmp, value)
     }
+    @Test
+    fun encodeDecodeEmptyMapWithData() {
+        val value: Map<String, BEObject> = emptyMap()
+        val buffer = ByteBuffer.allocate(100)
+        value.bencode().encodeTo(buffer)
+        val array = byteArrayOf(10, 20, 30, 40)
+        buffer.put(array)
+        buffer.flip()
+        val cmp = decodeBencodeToMap(buffer)
+        assertEquals(cmp, value)
+        val cmpArray = ByteArray(4)
+        buffer.get(cmpArray)
+        assertTrue(cmpArray.contentEquals(array))
+    }
 
     @Test
     fun encodeDecodeList() {
