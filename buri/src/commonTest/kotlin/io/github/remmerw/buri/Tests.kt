@@ -8,6 +8,21 @@ import kotlin.test.assertNotNull
 
 class Tests {
     @Test
+    fun encodeDecodeStringWithDara() {
+        val testData = "hi"
+        val buffer = ByteBuffer.allocate(100)
+        testData.bencode().encodeTo(buffer)
+        val array = byteArrayOf(10, 20, 30, 40)
+        buffer.put(array)
+        buffer.flip()
+        val cmp = decodeBencodeToString(buffer)
+        assertEquals(cmp, testData)
+        val cmpArray = ByteArray(4)
+        buffer.get(cmpArray)
+        assertTrue(cmpArray.contentEquals(array))
+    }
+    
+    @Test
     fun encodeDecodeString() {
         val testData = "hi"
         val buffer = ByteBuffer.allocate(100)
