@@ -10,10 +10,9 @@ import kotlin.test.assertTrue
 class Tests {
     @Test
     fun decodeMap() {
-val validSingleTorrent = "d8:announce40:http://example.com lengthi16384e6:pieces20:12345678901234567890ee"
-        val torrentString = "d8:announce37:http://example.org lengthi32768e6:pieces20:abcdefghijklmnopqrstee"
+        val torrent = "d8:announce18:http://example.com4:infod6:lengthi16384e4:name8:test.txt12:piece lengthi16384e6:pieces20:12345678901234567890ee"
 
-        val torrentBytes = validSingleTorrent.toByteArray()
+        val torrentBytes = torrent.toByteArray()
 
         val buffer = ByteBuffer.allocate(200)
         buffer.put(torrentBytes)
