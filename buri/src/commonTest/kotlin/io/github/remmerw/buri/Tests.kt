@@ -12,8 +12,8 @@ class Tests {
     fun decodeMap() {
         val torrentString = "d8:announce42:http://example.com lengthi16384e6:pieces20:12345678901234567890ee"
 
-        val torrentBytes2 = torrentString.toByteArray()
-
+        val torrentBytes = torrentString.toByteArray()
+/*
 val torrentBytes = byteArrayOf(
     100, 56, 58, 97, 110, 110, 111, 117, 110, 99, 101, 52, 50, 58, 104, 116, 
     116, 112, 58, 47, 47, 116, 114, 97, 99, 107, 101, 114, 46, 101, 120, 97, 
@@ -25,7 +25,7 @@ val torrentBytes = byteArrayOf(
     101, 54, 58, 112, 105, 101, 99, 101, 115, 50, 48, 58, 49, 50, 51, 52, 53, 
     54, 55, 56, 57, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 101, 101
 )
-
+*/
         val buffer = ByteBuffer.allocate(100)
         buffer.put(torrentBytes)
         buffer.rewind()
