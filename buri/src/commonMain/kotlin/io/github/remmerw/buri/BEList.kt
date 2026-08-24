@@ -1,6 +1,5 @@
 package io.github.remmerw.buri
 
-
 import java.nio.ByteBuffer
 import kotlin.jvm.JvmInline
 
