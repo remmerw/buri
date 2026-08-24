@@ -4,16 +4,15 @@ import java.nio.ByteBuffer
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 class Tests {
     @Test
     fun decodeMap() {
         val torrentString = "d8:announce42:http://example.com lengthi16384e6:pieces20:12345678901234567890ee"
 
-
-val torrentBytes = torrentString.toByteArray(Charsets.ISO_8859_1)
+        val torrentBytes = torrentString.toByteArray(Charsets.ISO_8859_1)
 
         val buffer = ByteBuffer.allocate(100)
         buffer.put(torrentBytes)
@@ -21,6 +20,7 @@ val torrentBytes = torrentString.toByteArray(Charsets.ISO_8859_1)
         val map = decodeBencodeToMap(buffer)
         assertNotNull(map)
     }
+
     @Test
     fun encodeDecodeStringWithDara() {
         val testData = "hi"
@@ -35,7 +35,7 @@ val torrentBytes = torrentString.toByteArray(Charsets.ISO_8859_1)
         buffer.get(cmpArray)
         assertTrue(cmpArray.contentEquals(array))
     }
-    
+
     @Test
     fun encodeDecodeString() {
         val testData = "hi"
@@ -75,6 +75,7 @@ val torrentBytes = torrentString.toByteArray(Charsets.ISO_8859_1)
         val cmp = decodeBencodeToMap(buffer)
         assertEquals(cmp, value)
     }
+
     @Test
     fun encodeDecodeEmptyMapWithData() {
         val value: Map<String, BEObject> = emptyMap()
