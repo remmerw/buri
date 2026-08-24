@@ -9,6 +9,19 @@ import kotlin.test.assertNotNull
 
 class Tests {
     @Test
+    fun decodeMap() {
+        val torrentString = "d8:announce42:http://example.com lengthi16384e6:pieces20:12345678901234567890ee"
+
+
+val torrentBytes = torrentString.toByteArray(Charsets.ISO_8859_1)
+
+        val buffer = ByteBuffer.allocate(100)
+        buffer.put(torrentBytes)
+        buffer.rewind()
+        val map = decodeBencodeToMap(buffer)
+        assertNotNull(map)
+    }
+    @Test
     fun encodeDecodeStringWithDara() {
         val testData = "hi"
         val buffer = ByteBuffer.allocate(100)
