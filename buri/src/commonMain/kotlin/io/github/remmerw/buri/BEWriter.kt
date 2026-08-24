@@ -1,6 +1,5 @@
 package io.github.remmerw.buri
 
-
 import java.nio.ByteBuffer
 
 fun ByteBuffer.bencodeArray(size: Int) {
@@ -61,4 +60,3 @@ fun ByteBuffer.bencodeMapKey(key: String) {
     this.put(DELIMITER.code.toByte())
     this.put(keyBytes)
 }
-
