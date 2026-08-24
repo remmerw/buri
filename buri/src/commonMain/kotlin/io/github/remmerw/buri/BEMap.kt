@@ -1,6 +1,6 @@
 package io.github.remmerw.buri
 
-import kotlinx.io.Sink
+
 import java.nio.ByteBuffer
 import kotlin.jvm.JvmInline
 
@@ -18,18 +18,6 @@ value class BEMap(
                 value.encodeTo(buffer)
             }
         buffer.bencodeEof()
-    }
-
-    override fun encodeTo(sink: Sink) {
-        sink.bencodeMap()
-
-        map.entries
-            .sortedBy { it.key }
-            .forEach { (key, value) ->
-                sink.bencodeMapKey(key)
-                value.encodeTo(sink)
-            }
-        sink.bencodeEof()
     }
 
     fun toMap(): Map<String, BEObject> = map
