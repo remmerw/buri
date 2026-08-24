@@ -1,6 +1,6 @@
 package io.github.remmerw.buri
 
-import kotlinx.io.Sink
+
 import java.nio.ByteBuffer
 import kotlin.jvm.JvmInline
 
@@ -16,16 +16,6 @@ value class BEList(
         }
 
         buffer.bencodeEof()
-    }
-
-    override fun encodeTo(sink: Sink) {
-        sink.bencodeList()
-
-        list.forEach { value ->
-            value.encodeTo(sink)
-        }
-
-        sink.bencodeEof()
     }
 
     fun toList(): List<BEObject> = list
