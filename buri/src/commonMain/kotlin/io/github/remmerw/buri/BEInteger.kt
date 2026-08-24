@@ -1,6 +1,6 @@
 package io.github.remmerw.buri
 
-import kotlinx.io.Sink
+
 import java.nio.ByteBuffer
 import kotlin.jvm.JvmInline
 
@@ -10,10 +10,6 @@ value class BEInteger(
 ) : BEObject {
     override fun encodeTo(buffer: ByteBuffer) {
         buffer.bencode(value)
-    }
-
-    override fun encodeTo(sink: Sink) {
-        sink.bencode(value)
     }
 
     fun toLong(): Long = value
