@@ -3,7 +3,9 @@ package io.github.remmerw.buri
 import java.nio.ByteBuffer
 
 fun ByteBuffer.bencodeArray(size: Int) {
-    this.put(size.toString().encodeToByteArray())
+    size.toString().forEach { char ->
+        this.put(char.code.toByte())
+    }
     this.put(DELIMITER.code.toByte())
 }
 
@@ -12,8 +14,7 @@ fun ByteBuffer.bencodeArrayData(value: ByteArray) {
 }
 
 fun ByteBuffer.bencodeArrayData(value: UShort) {
-    this.put((value.toInt() shr 8).toByte())
-    this.put((value.toInt() and 0xFF).toByte())
+    this.putShort(value.toShort())
 }
 
 fun ByteBuffer.bencodeArrayData(value: Byte) {
@@ -31,7 +32,9 @@ fun ByteBuffer.bencode(value: String) {
 
 fun ByteBuffer.bencode(value: Long) {
     this.put(INTEGER_PREFIX.code.toByte())
-    this.put(value.toString().encodeToByteArray())
+    value.toString().forEach { char ->
+        this.put(char.code.toByte())
+    }
     this.put(EOF.code.toByte())
 }
 
@@ -54,8 +57,9 @@ fun ByteBuffer.bencodeList() {
 fun ByteBuffer.bencodeMapKey(key: String) {
     val keyBytes = key.encodeToByteArray()
 
-    // Write key length and delimiter
-    this.put(keyBytes.size.toString().encodeToByteArray())
+    keyBytes.size.toString().forEach { char ->
+        this.put(char.code.toByte())
+    }
 
     this.put(DELIMITER.code.toByte())
     this.put(keyBytes)
